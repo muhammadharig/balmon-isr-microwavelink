@@ -126,7 +126,7 @@ class StatistikController extends Controller
 
         // Jika data terakhir tidak null, kita gunakan bulan dan tahunnya untuk filter data
         if ($dataTerakhirIsr !== null) {
-            $count_city = DB::table('microwavelinks')
+            $count_city_isr = DB::table('microwavelinks')
                 ->select('city', DB::raw('COUNT(city) as total'))
                 ->whereMonth('mon_query', $dataTerakhirIsr->month)
                 ->whereYear('mon_query', $dataTerakhirIsr->year)
@@ -134,15 +134,14 @@ class StatistikController extends Controller
                 ->get();
         } else {
             // Jika tidak ada data terakhir, tampilkan pesan atau beri tindakan yang sesuai
-            $dataTerakhirIsr = date('M');
-            $dataTerakhirIsr = date('Y');
+            $count_city_isr = [];
         }
 
         // save data to array
         $isrCity = [];
         $isrData = [];
 
-        foreach ($count_city as $city) {
+        foreach ($count_city_isr as $city) {
             $isrCity[] = $city->city;
             $isrData[] = $city->total;
         }
