@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'Hari Gunawansyah',
             'username' => 'hari',
-            'email' => 'hari@gmail.com',
+            'email' => 'mharigunawansyah@isr.cloud',
             'password' => Hash::make('hari8061'),
             'photo' => 'https://ui-avatars.com/api/?name=Hari+Pratama&background=random',
             'role' => 'operator',
