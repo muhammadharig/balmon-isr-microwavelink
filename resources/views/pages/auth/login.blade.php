@@ -46,7 +46,7 @@
                                 alt="logo-kominfo">
                         </div>
                         <h4 class="mb-2">Welcome to ISRMwl! 👋</h4>
-                        <p class="mb-4">Silahkan login untuk melanjutkan ke halaman Dashboard ISRMwl</p>
+                        <p class="mb-4">Saya merubah ini di dalam komputer saya</p>
                         <form action="{{ route('login') }}" method="POST">
                             @csrf
                             <div class="mb-3">
