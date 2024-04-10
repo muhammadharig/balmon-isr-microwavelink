@@ -21,8 +21,15 @@ class StatistikController extends Controller
                 ->orderBy('mon_query', 'desc')
                 ->first();
 
-            $bulan = $dataTerakhir->month;
-            $tahun = $dataTerakhir->year;
+            if ($dataTerakhir !== null) {
+                $bulan = $dataTerakhir->month;
+                $tahun = $dataTerakhir->year;
+            } else {
+                // Handle the case when $dataTerakhir is null
+                // For example, set default values for $bulan and $tahun
+                $bulan = date('m');
+                $tahun = date('Y');
+            }
         }
 
         // use parameters to get data
