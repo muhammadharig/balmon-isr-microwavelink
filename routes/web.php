@@ -50,16 +50,9 @@ Route::middleware(['auth'])->group(function () {
     // controller statistik
     Route::controller(StatistikController::class)->name('statistiks.')->group(function () {
        Route::get('/menu/statistik/statistik-isr', [StatistikController::class, 'isrStatistik'])->name('isrStatistik');
+       Route::get('/menu/statistik/statistik-bhp', [StatistikController::class, 'bhpStatistik'])->name('bhpStatistik');
     });
 
 });
 
 
-Route::get('/menu/user-profile', function () {
-    return view('pages.users.profile');
-})->name('profile');
-
-
-Route::get('/menu/statistik/statistik-bhp', function () {
-    return view('pages.bhp.index');
-});

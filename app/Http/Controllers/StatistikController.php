@@ -55,4 +55,52 @@ class StatistikController extends Controller
             ->with('bulan', $bulan)
             ->with('tahun', $tahun);
     }
+
+    public function bhpStatistik(Request $request)
+    {
+        // get parameters month and year
+        $bulan = $request->input('bulan');
+        $tahun = $request->input('tahun');
+
+        // if month and year is null
+        if (empty($bulan) || empty($tahun)) {
+            $dataTerakhir = DB::table('microwavelinks')
+                ->select(DB::raw('MONTH(mon_query) as month, YEAR(mon_query) as year'))
+                ->orderBy('mon_query', 'desc')
+                ->first();
+
+            $bulan = $dataTerakhir->month;
+            $tahun = $dataTerakhir->year;
+        }
+
+        // use parameters to get data
+        $sum_bhp = DB::table('microwavelinks')
+            ->select('city', DB::raw('SUM(bhp) as total'))
+            ->whereMonth('mon_query', $bulan)
+            ->whereYear('mon_query', $tahun)
+            ->groupBy('city')
+            ->get();
+
+        // save data to array
+        $labels = [];
+        $data = [];
+
+        foreach ($sum_bhp as $city) {
+            $labels[] = $city->city;
+            $data[] = $city->total;
+        }
+
+        // send year to select
+        $tahuns = Microwavelink::selectRaw('YEAR(mon_query) as tahuns')
+            ->distinct()
+            ->pluck('tahuns');
+
+        return view('pages.bhp.index')
+            ->with('data', $data)
+            ->with('labels', $labels)
+            ->with('tahuns', $tahuns)
+            ->with('bulan', $bulan)
+            ->with('tahun', $tahun);
+
+    }
 }
