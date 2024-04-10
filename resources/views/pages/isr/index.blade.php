@@ -46,7 +46,8 @@
         </div>
         <div class="col-lg-12">
             <div class="card">
-                <h5 class="card-header m-0 me-2 pb-3 text-center">Statistik ISR</h5>
+                <h6 class="card-header m-0 me-2 pb-3 text-center">STATISTIK ISR MICROWAVELINK PER.KAB/KOTA DI KALIMANTAN
+                    BARAT</h6>
                 <div class="px-4" style="position: relative; margin:auto; height:40vh; width:80vw">
                     <canvas id="isrChart"></canvas>
                 </div>

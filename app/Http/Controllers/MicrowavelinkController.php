@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class MicrowavelinkController extends Controller
 {
-    public function index(Request $request)
+    public function index(Microwavelink $microwavelink)
     {
-        $microwavelinks = Microwavelink::all();
+        $microwavelinks = $microwavelink->orderby('mon_query', 'desc')->get();
         // dd($microwavelinks);
         return view('pages.microwavelink.index', compact('microwavelinks'));
     }

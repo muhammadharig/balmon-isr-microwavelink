@@ -116,7 +116,7 @@ class StatistikController extends Controller
 
     }
 
-    public function dashboardStatistik(Request $request)
+    public function dashboardStatistik()
     {
         // Mendapatkan data terakhir isr
         $dataTerakhirIsr = DB::table('microwavelinks')
@@ -176,7 +176,6 @@ class StatistikController extends Controller
         }
 
         // dd($isrCity, $isrData, $bhpCity, $bhpData);
-
         return view('pages.home.dashboard')
             ->with('isrCity', $isrCity)
             ->with('isrData', $isrData)

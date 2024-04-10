@@ -7,13 +7,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title text-primary">Dashboard</h3>
-                        <p class="mb-4">Selamat Datang </p>
+                        <p class="mb-4">Welcome back, <b>{{ Auth::user()->name }}</b>.</p>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="card">
-                    <h5 class="card-header m-0 me-2 pb-3">Statistik ISR</h5>
+                    <h6 class="card-header m-0 me-2 pb-3 text-center">STATISTIK ISR MICROWAVELINK PER.KAB/KOTA DI KALIMANTAN
+                        BARAT</h6>
                     <div class="px-4" style="height: 400px">
                         <canvas id="isrBarChartDashboard"></canvas>
                     </div>
@@ -21,7 +22,8 @@
             </div>
             <div class="col-lg-6">
                 <div class="card">
-                    <h5 class="card-header m-0 me-2 pb-3">Statistik BHP</h5>
+                    <h6 class="card-header m-0 me-2 pb-3 text-center">STATISTIK BHP MICROWAVELINK PER.KAB/KOTA DI KALIMANTAN
+                        BARAT</h6>
                     <div class="px-4" style="height: 400px">
                         <canvas id="bhpBarChartDashboard"></canvas>
                     </div>
@@ -61,6 +63,7 @@
             var data_2 = {
                 datasets: [{
                     data: bhpData,
+                    label: 'Total',
                 }],
                 labels: bhpCity
             };
