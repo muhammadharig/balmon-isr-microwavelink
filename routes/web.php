@@ -21,9 +21,12 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('home', function () {
-        return view('pages.home.dashboard');
-    })->name('home');
+    // controller statistik
+    Route::controller(StatistikController::class)->name('statistiks.')->group(function () {
+        Route::get('/home', [StatistikController::class, 'dashboardStatistik'])->name('dashboadStatistik');
+        Route::get('/menu/statistik/statistik-isr', [StatistikController::class, 'isrStatistik'])->name('isrStatistik');
+        Route::get('/menu/statistik/statistik-bhp', [StatistikController::class, 'bhpStatistik'])->name('bhpStatistik');
+    });
 
     // controller users
     Route::controller(UserController::class)->name('users.')->group(function () {
@@ -45,12 +48,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/menu/data-microwavelink/{microwavelink}/edit', [MicrowavelinkController::class, 'edit'])->name('edit');
         Route::put('/menu/data-microwavelink/{microwavelink}/update', [MicrowavelinkController::class, 'update'])->name('update');
         Route::delete('/menu/data-microwavelink/{microwavelink}/destroy', [MicrowavelinkController::class, 'destroy'])->name('destroy');
-    });
-
-    // controller statistik
-    Route::controller(StatistikController::class)->name('statistiks.')->group(function () {
-       Route::get('/menu/statistik/statistik-isr', [StatistikController::class, 'isrStatistik'])->name('isrStatistik');
-       Route::get('/menu/statistik/statistik-bhp', [StatistikController::class, 'bhpStatistik'])->name('bhpStatistik');
     });
 
 });

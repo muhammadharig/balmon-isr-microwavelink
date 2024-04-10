@@ -15,7 +15,7 @@
                 <div class="card">
                     <h5 class="card-header m-0 me-2 pb-3">Statistik ISR</h5>
                     <div class="px-4" style="height: 400px">
-                        <canvas id="layanan"></canvas>
+                        <canvas id="isrBarChartDashboard"></canvas>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <h5 class="card-header m-0 me-2 pb-3">Statistik BHP</h5>
                     <div class="px-4" style="height: 400px">
-                        <canvas id="layanan_subbagian"></canvas>
+                        <canvas id="bhpBarChartDashboard"></canvas>
                     </div>
                 </div>
             </div>
@@ -31,23 +31,17 @@
     </div>
     <script>
         $(function() {
-            var ctx = document.getElementById("layanan").getContext('2d');
+            var ctx = document.getElementById("isrBarChartDashboard").getContext('2d');
+            var isrCity = {!! json_encode($isrCity) !!};
+            var isrData = {!! json_encode($isrData) !!};
             var data = {
                 datasets: [{
-                    data: [10, 20, 30],
-                    backgroundColor: [
-                        '#3c8dbc',
-                        '#f56954',
-                        '#f39c12',
-                    ],
+                    data: isrData,
+                    label: 'Total',
                 }],
-                labels: [
-                    'Request',
-                    'Layanan',
-                    'Problem'
-                ]
+                labels: isrCity
             };
-            var myDoughnutChart = new Chart(ctx, {
+            var isrBarChart = new Chart(ctx, {
                 type: 'bar',
                 data: data,
                 options: {
@@ -61,23 +55,16 @@
                 }
             });
 
-            var ctx_2 = document.getElementById("layanan_subbagian").getContext('2d');
+            var ctx_2 = document.getElementById("bhpBarChartDashboard").getContext('2d');
+            var bhpCity = {!! json_encode($bhpCity) !!};
+            var bhpData = {!! json_encode($bhpData) !!};
             var data_2 = {
                 datasets: [{
-                    data: [10, 20, 30],
-                    backgroundColor: [
-                        '#3c8dbc',
-                        '#f56954',
-                        '#f39c12',
-                    ],
+                    data: bhpData,
                 }],
-                labels: [
-                    'Request',
-                    'Layanan',
-                    'Problem'
-                ]
+                labels: bhpCity
             };
-            var myDoughnutChart_2 = new Chart(ctx_2, {
+            var bhpBarChart = new Chart(ctx_2, {
                 type: 'bar',
                 data: data_2,
                 options: {

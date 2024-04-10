@@ -10,6 +10,7 @@
                         <div class="col-md-3">
                             <label class="form-label" for="selectTypeOpt">Bulan</label>
                             <select class="form-select color-dropdown" name="bulan">
+                                <option value="" {{ $bulan == '' ? 'selected' : '' }}>Pilih Bulan</option>
                                 <option value="01" {{ $bulan == '01' ? 'selected' : '' }}>Januari</option>
                                 <option value="02" {{ $bulan == '02' ? 'selected' : '' }}>Februari</option>
                                 <option value="03" {{ $bulan == '03' ? 'selected' : '' }}>Maret</option>
@@ -27,6 +28,7 @@
                         <div class="col-md-3">
                             <label class="form-label">Tahun</label>
                             <select class="form-select" name="tahun">
+                                <option value="">Pilih Tahun</option>
                                 @foreach ($tahuns as $tahunOption)
                                     <option value="{{ $tahunOption }}"
                                         {{ old('tahun', $tahun) == $tahunOption ? 'selected' : '' }}>{{ $tahunOption }}

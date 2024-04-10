@@ -26,8 +26,7 @@ class StatistikController extends Controller
                 $tahun = $dataTerakhir->year;
             } else {
                 // Handle the case when $dataTerakhir is null
-                // For example, set default values for $bulan and $tahun
-                $bulan = date('m');
+                $bulan = date(''); // kosongkan
                 $tahun = date('Y');
             }
         }
@@ -76,8 +75,14 @@ class StatistikController extends Controller
                 ->orderBy('mon_query', 'desc')
                 ->first();
 
-            $bulan = $dataTerakhir->month;
-            $tahun = $dataTerakhir->year;
+            if ($dataTerakhir !== null) {
+                $bulan = $dataTerakhir->month;
+                $tahun = $dataTerakhir->year;
+            } else {
+                // Handle the case when $dataTerakhir is null
+                $bulan = date(''); // kosongkan
+                $tahun = date('Y');
+            }
         }
 
         // use parameters to get data
@@ -109,5 +114,73 @@ class StatistikController extends Controller
             ->with('bulan', $bulan)
             ->with('tahun', $tahun);
 
+    }
+
+    public function dashboardStatistik(Request $request)
+    {
+        // Mendapatkan data terakhir isr
+        $dataTerakhirIsr = DB::table('microwavelinks')
+            ->select(DB::raw('MONTH(mon_query) as month, YEAR(mon_query) as year'))
+            ->orderBy('mon_query', 'desc')
+            ->first();
+
+        // Jika data terakhir tidak null, kita gunakan bulan dan tahunnya untuk filter data
+        if ($dataTerakhirIsr !== null) {
+            $count_city = DB::table('microwavelinks')
+                ->select('city', DB::raw('COUNT(city) as total'))
+                ->whereMonth('mon_query', $dataTerakhirIsr->month)
+                ->whereYear('mon_query', $dataTerakhirIsr->year)
+                ->groupBy('city')
+                ->get();
+        } else {
+            // Jika tidak ada data terakhir, tampilkan pesan atau beri tindakan yang sesuai
+            return 'Tidak ada data tersedia.';
+        }
+
+        // save data to array
+        $isrCity = [];
+        $isrData = [];
+
+        foreach ($count_city as $city) {
+            $isrCity[] = $city->city;
+            $isrData[] = $city->total;
+        }
+
+
+        // Mendapatkan data terakhir bhp
+        $dataTerakhirBhp = DB::table('microwavelinks')
+            ->select(DB::raw('MONTH(mon_query) as month, YEAR(mon_query) as year'))
+            ->orderBy('mon_query', 'desc')
+            ->first();
+
+        // Jika data terakhir tidak null, kita gunakan bulan dan tahunnya untuk filter data
+        if ($dataTerakhirBhp !== null) {
+            $sum_bhp = DB::table('microwavelinks')
+                ->select('city', DB::raw('SUM(bhp) as total'))
+                ->whereMonth('mon_query', $dataTerakhirBhp->month)
+                ->whereYear('mon_query', $dataTerakhirBhp->year)
+                ->groupBy('city')
+                ->get();
+        } else {
+            // Jika tidak ada data terakhir, tampilkan pesan atau beri tindakan yang sesuai
+            return 'Tidak ada data tersedia.';
+        }
+
+        // save data to array
+        $bhpCity = [];
+        $bhpData = [];
+
+        foreach ($sum_bhp as $bhp) {
+            $bhpCity[] = $bhp->city;
+            $bhpData[] = $bhp->total;
+        }
+
+        // dd($isrCity, $isrData, $bhpCity, $bhpData);
+
+        return view('pages.home.dashboard')
+            ->with('isrCity', $isrCity)
+            ->with('isrData', $isrData)
+            ->with('bhpCity', $bhpCity)
+            ->with('bhpData', $bhpData);
     }
 }
