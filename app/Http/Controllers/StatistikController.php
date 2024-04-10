@@ -134,7 +134,8 @@ class StatistikController extends Controller
                 ->get();
         } else {
             // Jika tidak ada data terakhir, tampilkan pesan atau beri tindakan yang sesuai
-            return 'Tidak ada data tersedia.';
+            $dataTerakhirIsr = date('M');
+            $dataTerakhirIsr = date('Y');
         }
 
         // save data to array
