@@ -69,12 +69,12 @@ class UserController extends Controller
             $updateProfileUserRequest->photo->storeAs('public/photos', $fileName);
             $data['photo'] = $fileName;
         } else {
-            return back();
+            return back()->with('error', 'Kesalahan Dalam Upload File.');
         }
         // dd($data);
         $user->update($data);
 
-        return back(); //mengembali ke halaman sebelumnya
+        return back()->with('success', 'Data Profile Berhasil Di Perbarui.'); //mengembali ke halaman sebelumnya
     }
 
     public function destroy(User $user)
