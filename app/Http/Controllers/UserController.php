@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdatePasswordProfileRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UpdateProfileUserRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -52,7 +53,7 @@ class UserController extends Controller
         $data = $updatePasswordRequest->validated();
         $data['password'] = Hash::make($updatePasswordRequest->password);
         $user->update($data);
-        return redirect(route('users.index'))->with('success', 'Password user berhasil diubah.');
+        return redirect(route('users.index'))->with('success', 'Password berhasil diubah.');
     }
 
     public function editProfile(User $user)
@@ -75,6 +76,14 @@ class UserController extends Controller
         $user->update($data);
 
         return back()->with('success', 'Data profile berhasil di perbarui.'); //mengembali ke halaman sebelumnya
+    }
+
+    public function updatePasswordProfile(User $user, UpdatePasswordProfileRequest $updatePasswordProfileRequest)
+    {
+        $data = $updatePasswordProfileRequest->validated();
+        $data['password'] = Hash::make($updatePasswordProfileRequest->password);
+        $user->update($data);
+        return back()->with('success', 'Password berhasil di perbarui.');
     }
 
     public function destroy(User $user)

@@ -30,9 +30,10 @@ Route::middleware(['auth'])->group(function () {
 
     // controller users
     Route::controller(UserController::class)->name('users.')->group(function () {
+        Route::get('/profile/user/{user}/edit', [UserController::class, 'editProfile'])->name('edit.profile');
+        Route::put('/profile/user/{user}/update', [UserController::class, 'updateProfile'])->name('update.profile');
+        Route::put('/profile/user/{user}/update-password', [UserController::class, 'updatePasswordProfile'])->name('update.password.profile');
         Route::get('/menu/data-users', [UserController::class, 'index'])->name('index');
-        Route::get('/edit-profile', [UserController::class, 'editProfile'])->name('edit.profile');
-        Route::put('/update-profile/{user}/update', [UserController::class, 'updateProfile'])->name('update.profile');
         Route::get('/menu/data-users/create', [UserController::class, 'create'])->name('create');
         Route::post('/menu/data-users/store', [UserController::class, 'store'])->name('store');
         Route::get('/menu/data-users/{user}/edit', [UserController::class, 'edit'])->name('edit');

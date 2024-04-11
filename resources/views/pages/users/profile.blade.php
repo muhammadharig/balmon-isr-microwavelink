@@ -88,9 +88,9 @@
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                        <form action="#" method="POST">
+                        <form action="{{ route('users.update.password.profile'), auth()->user()->id }}" method="POST">
                             @csrf
-                            @method('PATCH')
+                            @method('PUT')
                             <div class="mb-3">
                                 <label class="form-label" for="password">New Password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
