@@ -19,6 +19,26 @@
                         <canvas id="isrBarChartDashboard"></canvas>
                     </div>
                 </div>
+                <div class="card mt-3">
+                    <table class="table table-borderless fw-bold">
+                        <tbody>
+                            <tr class="bg-info">
+                                <td class="text-white">KAB/KOTA</td>
+                                <td class="text-white text-center">TOTAL</td>
+                            </tr>
+                            @foreach ($isrCity as $index => $city)
+                                <tr>
+                                    <td>{{ $city }}</td>
+                                    <td class="text-center">{{ $isrData[$index] }}</td>
+                                </tr>
+                            @endforeach
+                            <tr class="bg-info">
+                                <td class="text-white">GRAND TOTAL</td>
+                                <td class="text-white text-center">{{ $grandTotalIsr }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-lg-6">
                 <div class="card">
@@ -27,6 +47,26 @@
                     <div class="px-4" style="height: 400px">
                         <canvas id="bhpBarChartDashboard"></canvas>
                     </div>
+                </div>
+                <div class="card mt-3">
+                    <table class="table table-borderless fw-bold">
+                        <tbody>
+                            <tr class="bg-info">
+                                <td class="text-white">KAB/KOTA</td>
+                                <td class="text-white text-center">TOTAL</td>
+                            </tr>
+                            @foreach ($bhpCity as $index => $city)
+                                <tr>
+                                    <td>{{ $city }}</td>
+                                    <td class="text-center">{{ $bhpData[$index] }}</td>
+                                </tr>
+                            @endforeach
+                            <tr class="bg-info">
+                                <td class="text-white">GRAND TOTAL</td>
+                                <td class="text-white text-center">Rp. {{ $grandTotalBhp }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

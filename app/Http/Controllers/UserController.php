@@ -58,23 +58,25 @@ class UserController extends Controller
 
     public function editProfile(User $user)
     {
+        // dd($user);
         return view('pages.users.profile', compact('user'));
     }
 
     public function updateProfile(User $user, UpdateProfileUserRequest $updateProfileUserRequest)
     {
         $data = $updateProfileUserRequest->validated();
-        // cek apakah file sudah terupload
-        if ($updateProfileUserRequest->hasFile('photo') && $updateProfileUserRequest->file('photo')->isValid()) {
-            $fileName = time() . '.' . $updateProfileUserRequest->photo->extension();
-            $updateProfileUserRequest->photo->storeAs('public/photos', $fileName);
-            $data['photo'] = $fileName;
-        } else {
-            return back()->with('error', 'Kesalahan Dalam Upload File.');
-        }
-        // dd($data);
-        $user->update($data);
 
+        if ($updateProfileUserRequest->photo) {
+            // cek apakah file sudah terupload
+            if ($updateProfileUserRequest->hasFile('photo') && $updateProfileUserRequest->file('photo')->isValid()) {
+                $fileName = time() . '.' . $updateProfileUserRequest->photo->extension();
+                $updateProfileUserRequest->photo->storeAs('public/photos', $fileName);
+                $data['photo'] = $fileName;
+            } else {
+                return back()->with('error', 'Kesalahan Dalam Upload File.');
+            }
+        }
+        $user->update($data);
         return back()->with('success', 'Data profile berhasil di perbarui.'); //mengembali ke halaman sebelumnya
     }
 

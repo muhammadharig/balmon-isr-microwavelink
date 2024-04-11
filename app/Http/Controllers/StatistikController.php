@@ -53,13 +53,21 @@ class StatistikController extends Controller
             ->distinct()
             ->pluck('tahuns');
 
+        // grand total isr
+        $grandTotalIsr = DB::table('microwavelinks')->count('city');
+
+        // grand total bhp
+        $grandTotalBhp = DB::table('microwavelinks')->sum('bhp');
+
         // dd($tahuns);
         return view('pages.isr.index')
             ->with('data', $data)
             ->with('labels', $labels)
             ->with('tahuns', $tahuns)
             ->with('bulan', $bulan)
-            ->with('tahun', $tahun);
+            ->with('tahun', $tahun)
+            ->with('grandTotalIsr', $grandTotalIsr)
+            ->with('grandTotalBhp', $grandTotalBhp);
     }
 
     public function bhpStatistik(Request $request)
@@ -107,12 +115,20 @@ class StatistikController extends Controller
             ->distinct()
             ->pluck('tahuns');
 
+        // grand total isr
+        $grandTotalIsr = DB::table('microwavelinks')->count('city');
+
+        // grand total bhp
+        $grandTotalBhp = DB::table('microwavelinks')->sum('bhp');
+
         return view('pages.bhp.index')
             ->with('data', $data)
             ->with('labels', $labels)
             ->with('tahuns', $tahuns)
             ->with('bulan', $bulan)
-            ->with('tahun', $tahun);
+            ->with('tahun', $tahun)
+            ->with('grandTotalIsr', $grandTotalIsr)
+            ->with('grandTotalBhp', $grandTotalBhp);
 
     }
 
@@ -175,11 +191,19 @@ class StatistikController extends Controller
             $bhpData[] = $bhp->total;
         }
 
+        // grand total isr
+        $grandTotalIsr = DB::table('microwavelinks')->count('city');
+
+        // grand total bhp
+        $grandTotalBhp = DB::table('microwavelinks')->sum('bhp');
+
         // dd($isrCity, $isrData, $bhpCity, $bhpData);
         return view('pages.home.dashboard')
             ->with('isrCity', $isrCity)
             ->with('isrData', $isrData)
             ->with('bhpCity', $bhpCity)
-            ->with('bhpData', $bhpData);
+            ->with('bhpData', $bhpData)
+            ->with('grandTotalIsr', $grandTotalIsr)
+            ->with('grandTotalBhp', $grandTotalBhp);
     }
 }

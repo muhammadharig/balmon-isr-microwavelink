@@ -88,7 +88,7 @@
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                        <form action="{{ route('users.update.password.profile'), auth()->user()->id }}" method="POST">
+                        <form action="{{ route('users.update.password.profile', auth()->user()->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">

@@ -52,6 +52,26 @@
                     <canvas id="bhpChart"></canvas>
                 </div>
             </div>
+            <div class="card mt-3">
+                <table class="table table-borderless fw-bold">
+                    <tbody>
+                        <tr class="bg-info">
+                            <td class="text-white">KAB/KOTA</td>
+                            <td class="text-white text-center">TOTAL</td>
+                        </tr>
+                        @foreach ($labels as $index => $city)
+                            <tr>
+                                <td>{{ $city }}</td>
+                                <td class="text-center">{{ $data[$index] }}</td>
+                            </tr>
+                        @endforeach
+                        <tr class="bg-info">
+                            <td class="text-white">GRAND TOTAL</td>
+                            <td class="text-white text-center">Rp. {{ $grandTotalBhp }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <script>
