@@ -16,3 +16,12 @@
         });
     </script>
 @endif
+@if (session()->has('warning'))
+    <script>
+        iziToast.warning({
+            title: "Informasi!",
+            message: "{{ session('warning') }}",
+            position: "topRight",
+        });
+    </script>
+@endif

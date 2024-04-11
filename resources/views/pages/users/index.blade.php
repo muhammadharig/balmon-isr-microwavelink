@@ -54,7 +54,8 @@
                                             <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                 <input type="hidden" name="_method" value="DELETE" />
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>
+                                                <button type="submit" class="btn btn-danger btn-sm show_confirm"><i
+                                                        class="fas fa-trash"></i>
                                                     Delete</button>
                                             </form>
                                         </div>

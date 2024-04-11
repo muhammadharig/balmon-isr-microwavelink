@@ -38,7 +38,6 @@
     </div>
 
     @include('components.script')
-    @stack('js')
     @include('components.alert')
 </body>
 

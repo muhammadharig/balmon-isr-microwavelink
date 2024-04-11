@@ -18,20 +18,27 @@ class MicrowavelinkController extends Controller
 
     public function import(Request $request)
     {
-        // dd($request->file('import_file'));
         $request->validate([
             'import_file' => [
                 'required',
                 'file',
                 'mimes:xlsx,xls,csv',
+                'max:2000',
             ],
         ]);
 
         $file = $request->file('import_file');
+
+        // Validate if all rows have curr_lic_num filled
         $import = new MicrowavelinkImport();
+        if (!$import->allRowsHaveCurrLicNum($file)) {
+            return redirect(route('microwavelinks.index'))->with('warning', 'Semua baris harus memiliki nilai untuk curr_lic_num.');
+        }
+
+        // Perform import
         $import->import($file);
 
-        return to_route('microwavelinks.index');
+        return redirect(route('microwavelinks.index'))->with('success', 'Data microwavelink berhasil diimport.');
     }
 
     public function edit(Microwavelink $microwavelink)

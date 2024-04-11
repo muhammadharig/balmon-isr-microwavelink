@@ -61,7 +61,19 @@ class MicrowavelinkImport implements ToCollection, WithHeadingRow, WithValidatio
     {
         return [
             'curr_lic_num.required' => 'curr_lic_num harus diisi',
-            'curr_lic_num.unique' => 'curr_lic_num sudah terdaftar',
         ];
     }
+
+    // Method to check if all rows have curr_lic_num filled
+    public function allRowsHaveCurrLicNum($file)
+    {
+        $rows = \Maatwebsite\Excel\Facades\Excel::toCollection(new self(), $file)[0];
+        foreach ($rows as $row) {
+            if (empty($row['curr_lic_num'])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
