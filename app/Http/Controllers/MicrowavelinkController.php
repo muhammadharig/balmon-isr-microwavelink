@@ -11,7 +11,7 @@ class MicrowavelinkController extends Controller
 {
     public function index(Microwavelink $microwavelink)
     {
-        $microwavelinks = $microwavelink->orderby('mon_query', 'desc')->get();
+        $microwavelinks = Microwavelink::paginate(20);
         // dd($microwavelinks);
         return view('pages.microwavelink.index', compact('microwavelinks'));
     }
