@@ -52,7 +52,7 @@ class UserController extends Controller
         $data = $updatePasswordRequest->validated();
         $data['password'] = Hash::make($updatePasswordRequest->password);
         $user->update($data);
-        return redirect()->route('users.index');
+        return redirect(route('users.index'))->with('success', 'Password user berhasil diubah.');
     }
 
     public function editProfile(User $user)
@@ -74,7 +74,7 @@ class UserController extends Controller
         // dd($data);
         $user->update($data);
 
-        return back()->with('success', 'Data Profile Berhasil Di Perbarui.'); //mengembali ke halaman sebelumnya
+        return back()->with('success', 'Data profile berhasil di perbarui.'); //mengembali ke halaman sebelumnya
     }
 
     public function destroy(User $user)
