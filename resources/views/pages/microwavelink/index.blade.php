@@ -104,4 +104,29 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+
+            Swal.fire({
+                    title: "Apakah Anda Yakin Ingin Menghapus Data Berikut?",
+                    text: "Data Yang Dihapus Tidak Dapat Dikembalikan.",
+                    icon: "warning",
+                    showCloseButton: true,
+                    showCancelButton: true,
+                    confirmButtonColor: "#28a745",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Hapus",
+                    cancelButtonText: "Batal",
+                })
+                .then((willDelete) => {
+                    if (willDelete.isConfirmed) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
 @endsection
