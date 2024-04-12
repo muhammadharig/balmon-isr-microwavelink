@@ -27,7 +27,7 @@ class UserRequest extends FormRequest
             'email' => 'required|email|unique:users|max:191',
             'password' => 'required|confirmed|min:8|max:191',
             'phone' => 'required|string|min:12|max:191',
-            'role' => 'required|in:user,operator,pimpinan',
+            'role' => 'required|in:admin,user,operator,pimpinan',
         ];
     }
 }
