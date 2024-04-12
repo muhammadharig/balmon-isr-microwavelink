@@ -40,10 +40,12 @@
             <div class="card-body">
                 <div class="d-flex align-items-start align-items-sm-center gap-4 mb-3">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalImport"><i
-                            class="fas fa-upload"></i>
-                        Import
-                    </button>
+                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'operator')
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#modalImport"><i class="fas fa-upload"></i>
+                            Import
+                        </button>
+                    @endif
                 </div>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-bordered" id="tbl-bc">
@@ -62,7 +64,9 @@
                                 <th class="text-white">SID_LONG</th>
                                 <th class="text-white">SID_LAT</th>
                                 <th class="text-white">MON_QURY</th>
-                                <th class="text-white">ACTION</th>
+                                @if (Auth::user()->role == 'admin' || Auth::user()->role == 'operator')
+                                    <th class="text-white">ACTION</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -81,21 +85,24 @@
                                     <td>{{ $column->sid_long }}</td>
                                     <td>{{ $column->sid_lat }}</td>
                                     <td>{{ $column->mon_query }}</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ route('microwavelinks.edit', $column->id) }}"
-                                                class="btn btn-warning btn-sm mx-2"><i class="fas fa-edit"></i> Edit</a>
-                                            <form action="{{ route('microwavelinks.destroy', $column->id) }}"
-                                                method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                <button type="submit" class="btn btn-danger btn-sm show_confirm"><i
-                                                        class="fas fa-trash"></i>
-                                                    Delete</button>
-                                            </form>
-                                    </td>
+                                    @if (Auth::user()->role == 'admin' || Auth::user()->role == 'operator')
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route('microwavelinks.edit', $column->id) }}"
+                                                    class="btn btn-warning btn-sm mx-2"><i class="fas fa-edit"></i> Edit</a>
+                                                <form action="{{ route('microwavelinks.destroy', $column->id) }}"
+                                                    method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="DELETE" />
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                                    <button type="submit" class="btn btn-danger btn-sm show_confirm"><i
+                                                            class="fas fa-trash"></i>
+                                                        Delete</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

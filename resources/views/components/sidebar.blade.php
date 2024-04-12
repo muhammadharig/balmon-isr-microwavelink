@@ -31,13 +31,14 @@
             <span class="menu-header-text">Menu</span>
         </li>
 
-        <li class="menu-item {{ Request::is('menu/data-users*') ? 'active' : '' }}">
-            <a href="/menu/data-users" class="menu-link">
-                <i class="fas fa-users" style="padding-right: 10px;"></i>
-                <span>Data Users</span>
-            </a>
-        </li>
-
+        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'pimpinan')
+            <li class="menu-item {{ Request::is('menu/data-users*') ? 'active' : '' }}">
+                <a href="/menu/data-users" class="menu-link">
+                    <i class="fas fa-users" style="padding-right: 10px;"></i>
+                    <span>Data Users</span>
+                </a>
+            </li>
+        @endif
         <li class="menu-item {{ Request::is('menu/data-microwavelink*') ? 'active' : '' }}">
             <a href="/menu/data-microwavelink" class="menu-link">
                 <i class="fas fa-circle-dot" style="padding-right: 10px;"></i>

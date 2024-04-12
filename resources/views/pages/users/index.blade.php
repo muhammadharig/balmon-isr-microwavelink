@@ -5,10 +5,12 @@
         <div class="card">
             <h5 class="card-header">Data Users</h5>
             <div class="card-body">
-                <div class="d-flex align-items-start align-items-sm-center gap-4 mb-3">
-                    <a href="{{ route('users.create') }}" class="btn btn-primary"> <i class="fas fa-plus"></i>Add New
-                        User</a>
-                </div>
+                @if (Auth::user()->role == 'admin')
+                    <div class="d-flex align-items-start align-items-sm-center gap-4 mb-3">
+                        <a href="{{ route('users.create') }}" class="btn btn-primary"> <i class="fas fa-plus"></i>Add New
+                            User</a>
+                    </div>
+                @endif
                 <div class="table-responsive text-nowrap">
                     <table class="table table-striped" id="tbl-users">
                         <thead>
@@ -19,7 +21,10 @@
                                 <th class="text-white">Email</th>
                                 <th class="text-white">Phone</th>
                                 <th class="text-white">Role</th>
-                                <th class="text-white">Action</th>
+                                @if (auth()->user()->role == 'pimpinan')
+                                @elseif (auth()->user()->role == 'admin')
+                                    <th class="text-white">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -39,27 +44,34 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>
-                                        @if ($user->role == 'user')
-                                            <span class="badge bg-dark">{{ $user->role }}</span>
-                                        @elseif ($user->role == 'operator')
+                                        @if ($user->role == 'admin')
                                             <span class="badge bg-primary">{{ $user->role }}</span>
-                                        @elseif ($user->role == 'pimpinan')
-                                            <span class="badge bg-success">{{ $user->role }}</span>
+                                        @elseif($user->role == 'user')
+                                            <span class="badge bg-secondary">{{ $user->role }}</span>
+                                        @elseif($user->role == 'operator')
+                                            <span class="badge bg-warning">{{ $user->role }}</span>
+                                        @elseif($user->role == 'pimpinan')
+                                            <span class="badge bg-dark">{{ $user->role }}</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
-                                        <div class="btn-group" role="group">
-                                            <a href="{{ route('users.edit', $user->id) }}"
-                                                class="btn btn-warning btn-sm mx-2"><i class="fas fa-edit"></i> Edit</a>
-                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                                <input type="hidden" name="_method" value="DELETE" />
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                                <button type="submit" class="btn btn-danger btn-sm show_confirm"><i
-                                                        class="fas fa-trash"></i>
-                                                    Delete</button>
-                                            </form>
-                                        </div>
-                                    </td>
+                                    @if (Auth::user()->role == 'pimpinan')
+                                    @elseif (Auth::user()->role == 'admin')
+                                        <td class="text-center">
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route('users.edit', $user->id) }}"
+                                                    class="btn btn-warning btn-sm mx-2"><i class="fas fa-edit"></i> Edit</a>
+                                                @if ($user->role == 'admin')
+                                                @else
+                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                        <input type="hidden" name="_method" value="DELETE" />
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                                        <button type="submit" class="btn btn-danger btn-sm show_confirm"><i
+                                                                class="fas fa-trash"></i> Delete</button>
+                                                    </form>
+                                                @endif
+                                            </div>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

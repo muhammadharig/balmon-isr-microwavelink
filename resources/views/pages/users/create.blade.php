@@ -69,6 +69,7 @@
                             <select id="role" name="role"
                                 class="select2 form-select @error('role') is-invalid @enderror">
                                 <option value="">Select Roles</option>
+                                <option value="admin">Admin</option>
                                 <option value="user">User</option>
                                 <option value="operator">Operator</option>
                                 <option value="pimpinan">Pimpinan</option>

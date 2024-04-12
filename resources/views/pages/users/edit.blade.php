@@ -53,6 +53,7 @@
                                 <label class="form-label" for="role">Roles</label>
                                 <select class="form-select @error('role') is-invalid @enderror" id="role"
                                     name="role" required>
+                                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
                                     <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
                                     <option value="operator" {{ $user->role == 'operator' ? 'selected' : '' }}>Operator
                                     </option>
