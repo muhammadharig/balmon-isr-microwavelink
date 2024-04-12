@@ -14,10 +14,10 @@
             <div class="col-lg-6">
                 <div class="card">
                     <h6 class="card-header m-0 me-2 pb-3 text-center">STATISTIK ISR MICROWAVELINK PER.KAB/KOTA DI KALIMANTAN
-                        BARAT</h6>
-                    <div class="px-4" style="height: 400px">
-                        <canvas id="isrBarChartDashboard"></canvas>
-                    </div>
+                        BARAT</h6><span class="text-center">
+                        <div class="px-4" style="height: 400px">
+                            <canvas id="isrBarChartDashboard"></canvas>
+                        </div>
                 </div>
                 <div class="card mt-3">
                     <table class="table table-borderless fw-bold">
@@ -94,7 +94,7 @@
                         labels: {
                             boxWidth: 12
                         }
-                    }
+                    },
                 }
             });
 

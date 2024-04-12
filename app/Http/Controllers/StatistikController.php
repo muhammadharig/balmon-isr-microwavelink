@@ -54,10 +54,7 @@ class StatistikController extends Controller
             ->pluck('tahuns');
 
         // grand total isr
-        $grandTotalIsr = DB::table('microwavelinks')->count('city');
-
-        // grand total bhp
-        $grandTotalBhp = DB::table('microwavelinks')->sum('bhp');
+        $grandTotalIsr = array_sum($data);
 
         // dd($tahuns);
         return view('pages.isr.index')
@@ -66,8 +63,7 @@ class StatistikController extends Controller
             ->with('tahuns', $tahuns)
             ->with('bulan', $bulan)
             ->with('tahun', $tahun)
-            ->with('grandTotalIsr', $grandTotalIsr)
-            ->with('grandTotalBhp', $grandTotalBhp);
+            ->with('grandTotalIsr', $grandTotalIsr);
     }
 
     public function bhpStatistik(Request $request)
@@ -115,13 +111,8 @@ class StatistikController extends Controller
             ->distinct()
             ->pluck('tahuns');
 
-        // grand total isr
-        $grandTotalIsr = DB::table('microwavelinks')->count('city');
-
         // grand total bhp
-        $grandTotalBhp = DB::table('microwavelinks')->sum('bhp');
-        // $formattedTotalBhp = "Rp " . number_format($grandTotalBhp, 0, ',', '.');
-        // dd($formattedTotalBhp);
+        $grandTotalBhp = array_sum($data);
 
         return view('pages.bhp.index')
             ->with('data', $data)
@@ -129,7 +120,6 @@ class StatistikController extends Controller
             ->with('tahuns', $tahuns)
             ->with('bulan', $bulan)
             ->with('tahun', $tahun)
-            ->with('grandTotalIsr', $grandTotalIsr)
             ->with('grandTotalBhp', $grandTotalBhp);
 
     }
@@ -164,7 +154,6 @@ class StatistikController extends Controller
             $isrData[] = $city->total;
         }
 
-
         // Mendapatkan data terakhir bhp
         $dataTerakhirBhp = DB::table('microwavelinks')
             ->select(DB::raw('MONTH(mon_query) as month, YEAR(mon_query) as year'))
@@ -192,12 +181,13 @@ class StatistikController extends Controller
             $bhpCity[] = $bhp->city;
             $bhpData[] = $bhp->total;
         }
+        // dd($bulanDanTahun);
 
         // grand total isr
-        $grandTotalIsr = DB::table('microwavelinks')->count('city');
+        $grandTotalIsr = array_sum($isrData);
 
         // grand total bhp
-        $grandTotalBhp = DB::table('microwavelinks')->sum('bhp');
+        $grandTotalBhp = array_sum($bhpData);
 
         // dd($isrCity, $isrData, $bhpCity, $bhpData);
         return view('pages.home.dashboard')
