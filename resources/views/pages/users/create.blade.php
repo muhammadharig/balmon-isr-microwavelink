@@ -69,10 +69,12 @@
                             <select id="role" name="role"
                                 class="select2 form-select @error('role') is-invalid @enderror">
                                 <option value="">Select Roles</option>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                                <option value="operator">Operator</option>
-                                <option value="pimpinan">Pimpinan</option>
+                                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                                <option value="operator" {{ old('role') == 'operator' ? 'selected' : '' }}>Operator
+                                </option>
+                                <option value="pimpinan" {{ old('role') == 'pimpinan' ? 'selected' : '' }}>Pimpinan
+                                </option>
                             </select>
                             @error('role')
                                 <div class="invalid-feedback">
