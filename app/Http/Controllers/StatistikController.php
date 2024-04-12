@@ -120,6 +120,8 @@ class StatistikController extends Controller
 
         // grand total bhp
         $grandTotalBhp = DB::table('microwavelinks')->sum('bhp');
+        // $formattedTotalBhp = "Rp " . number_format($grandTotalBhp, 0, ',', '.');
+        // dd($formattedTotalBhp);
 
         return view('pages.bhp.index')
             ->with('data', $data)

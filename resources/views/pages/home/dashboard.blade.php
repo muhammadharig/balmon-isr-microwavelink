@@ -29,12 +29,12 @@
                             @foreach ($isrCity as $index => $city)
                                 <tr>
                                     <td>{{ $city }}</td>
-                                    <td class="text-center">{{ $isrData[$index] }}</td>
+                                    <td class="text-center">{{ number_format($isrData[$index], 0, ',', '.') }}</td>
                                 </tr>
                             @endforeach
                             <tr class="bg-info">
                                 <td class="text-white">GRAND TOTAL</td>
-                                <td class="text-white text-center">{{ $grandTotalIsr }}</td>
+                                <td class="text-white text-center">{{ number_format($grandTotalIsr, 0, ',', '.') }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,17 +53,18 @@
                         <tbody>
                             <tr class="bg-info">
                                 <td class="text-white">KAB/KOTA</td>
-                                <td class="text-white text-center">TOTAL</td>
+                                <td class="text-white text-left">TOTAL</td>
                             </tr>
                             @foreach ($bhpCity as $index => $city)
                                 <tr>
                                     <td>{{ $city }}</td>
-                                    <td class="text-center">{{ $bhpData[$index] }}</td>
+                                    <td class="text-left">{{ 'Rp. ' . number_format($bhpData[$index], 0, ',', '.') }}</td>
                                 </tr>
                             @endforeach
                             <tr class="bg-info">
                                 <td class="text-white">GRAND TOTAL</td>
-                                <td class="text-white text-center">Rp. {{ $grandTotalBhp }}</td>
+                                <td class="text-white text-left">{{ 'Rp. ' . number_format($grandTotalBhp, 0, ',', '.') }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>

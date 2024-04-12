@@ -56,18 +56,18 @@
                 <table class="table table-borderless fw-bold">
                     <tbody>
                         <tr class="bg-info">
-                            <td class="text-white">KAB/KOTA</td>
+                            <td class="text-white text-center">KAB/KOTA</td>
                             <td class="text-white text-center">TOTAL</td>
                         </tr>
                         @foreach ($labels as $index => $city)
                             <tr>
-                                <td>{{ $city }}</td>
-                                <td class="text-center">{{ $data[$index] }}</td>
+                                <td class="text-center">{{ $city }}</td>
+                                <td class="text-center">{{ number_format($data[$index], 0, ',', '.') }}</td>
                             </tr>
                         @endforeach
                         <tr class="bg-info">
-                            <td class="text-white">GRAND TOTAL</td>
-                            <td class="text-white text-center">{{ $grandTotalIsr }}</td>
+                            <td class="text-white text-center">GRAND TOTAL</td>
+                            <td class="text-white text-center">{{ number_format($grandTotalIsr, 0, ',', '.') }}</td>
                         </tr>
                     </tbody>
                 </table>
