@@ -53,15 +53,12 @@
                                 <label class="form-label" for="role">Roles</label>
                                 <select class="form-select @error('role') is-invalid @enderror" id="role"
                                     name="role" required>
-                                    @if (Auth::user()->role == 'admin')
-                                    @else
-                                        <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                                        <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
-                                        <option value="operator" {{ $user->role == 'operator' ? 'selected' : '' }}>Operator
-                                        </option>
-                                        <option value="pimpinan" {{ $user->role == 'pimpinan' ? 'selected' : '' }}>Pimpinan
-                                        </option>
-                                    @endif
+                                    <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                    <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
+                                    <option value="operator" {{ $user->role == 'operator' ? 'selected' : '' }}>Operator
+                                    </option>
+                                    <option value="pimpinan" {{ $user->role == 'pimpinan' ? 'selected' : '' }}>Pimpinan
+                                    </option>
                                 </select>
                                 @error('role')
                                     <div class="invalid-feedback">{{ $message }}</div>
