@@ -5,7 +5,7 @@
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            , Balai Monitor Spektrum Kelas II Pontianak Design by
+            | Balai Monitor Spektrum Kelas II Pontianak Design by
             <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Muhammad Hari
                 Gunawansyah</a>
         </div>
